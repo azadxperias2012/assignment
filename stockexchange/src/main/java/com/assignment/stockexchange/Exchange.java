@@ -11,7 +11,7 @@ import com.assignment.stockexchange.db.ExchangeManager;
 
 @Path("exchange")
 public class Exchange {
-	
+
 	@GET
     @Path("dbsnapshot")
     @Produces(MediaType.TEXT_PLAIN)
@@ -19,7 +19,7 @@ public class Exchange {
 		String companies = ExchangeManager.displayCompanies();
         return companies;
     }
-	
+
 	@GET
 	@Path("matchcompany")
     @Produces(MediaType.TEXT_PLAIN)
@@ -31,4 +31,11 @@ public class Exchange {
         return winners;
     }
 
+	@GET
+    @Path("logs_screenshot")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String logsScreenshot() {
+		String logs = ExchangeManager.displayLogs();
+        return logs;
+    }
 }

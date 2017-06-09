@@ -105,6 +105,9 @@ public class ExchangeManager {
 				}
 			}
 		}
+		if(logMessageBuffer.length() > 0) {
+			LoggerUtil.log(logMessageBuffer.toString());
+		}
 		return result;
 	}
 	
@@ -151,6 +154,7 @@ public class ExchangeManager {
 		}
 		return !matchedCompanies.isEmpty();
 	}
+	
 	
 	private static boolean applyBaseBidFilter(List<MatchedCompanyBean> matchedCompanies, int baseBid) {
 		Iterator<MatchedCompanyBean> it = matchedCompanies.iterator();
@@ -203,5 +207,9 @@ public class ExchangeManager {
 		} catch (SQLException | IOException | PropertyVetoException e) {
 			System.err.println(e);
 		}
+	}
+
+	public static synchronized String displayLogs() {
+		return LoggerUtil.readLogs();
 	}
 }
