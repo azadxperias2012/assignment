@@ -24,5 +24,24 @@ public class App
 
         student1.updateProfile("Azad");
         System.out.println("Updated name of student1: " + student1.name);
+
+        Student student4 = student1;
+        System.out.println("Name of student4: " + student4.name);
+
+        student4.updateProfile("mike");
+        System.out.println("Name of student1: " + student1.name);
+
+        student4 = student2;
+        System.out.println("Name of student4: " + student4.name);
+
+        student2 = student1;
+        System.out.println("Name of student4: " + student4.name);
+        System.out.println("Name of student2: " + student2.name);
+
+        student4 = new Student("Abi");
+
+        System.out.println("Name of student4: " + student4.name);
+        System.out.println("Name of student2: " + student2.name);
+        System.out.println("Name of student1: " + student1.name);
     }
 }
