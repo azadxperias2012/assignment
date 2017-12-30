@@ -3,8 +3,8 @@ package com.neotechlabs.basics.strings;
 public class StringExamples {
 
     public static void main(String[] args) {
-//        stringExamples();
-//        stringPoolExamples();
+        stringExamples();
+        stringPoolExamples();
         stringConcatenationExample();
     }
 
