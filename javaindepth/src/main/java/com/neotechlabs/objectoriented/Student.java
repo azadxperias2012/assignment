@@ -4,7 +4,8 @@ public class Student {
 
     private static int studentCount;
 
-    private int id;
+    private static int idInitializer = 1000;
+    private final int id;
     private String name;
     private String gender = "male";
 
@@ -20,20 +21,19 @@ public class Student {
         this.name = name;
     }
 
-    public Student(int id, String name, String gender) {
-        this.id = id;
+    public Student(String name, String gender) {
         this.name = name;
         this.gender = gender;
 
+        id = ++idInitializer;
         studentCount++;
+        System.out.println("ID of " + name + ": " + id);
     }
 
     public static void main(String[] args) {
-        int[] studentIds = {1001, 1002, 1003};
-
-        Student student1 = new Student(studentIds[0], "joan", "male");
-        Student student2 = new Student(studentIds[1], "raj", "male");
-        Student student3 = new Student(studentIds[2], "anita", "female");
+        Student student1 = new Student("joan", "male");
+        Student student2 = new Student("raj", "male");
+        Student student3 = new Student("anita", "female");
 
         System.out.println("Name of student1: " + student1.getName());
         System.out.println("Name of student2: " + student2.getName());
