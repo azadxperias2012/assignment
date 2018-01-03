@@ -51,9 +51,15 @@ public class UserTest {
         //((Staff) staff).staticMethod();
         //staff.saveWebLink();
 
-        User staff = new Staff();
+        //User staff = new Staff();
         //System.out.println("User type: " + staff.userType); // early binding
-        staff.displayUserInfo(); // comparison of field hiding & field overriding
+        //staff.displayUserInfo(); // comparison of field hiding & field overriding
+        //System.out.println(staff.hashCode());
+
+        //User staff1 = staff;
+        //System.out.println(staff1.hashCode());
+
+        User staff = new Staff(3);
     }
 
 }

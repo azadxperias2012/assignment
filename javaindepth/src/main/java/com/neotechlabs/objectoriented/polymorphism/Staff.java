@@ -11,6 +11,13 @@ public class Staff extends User {
 
     public Staff() {
         userType = "Staff";
+        System.out.println("Staff Constructor 1");
+    }
+
+    public Staff(int id) {
+        this();
+        this.id = id;
+        System.out.println("Staff Constructor 2");
     }
 
     public void printUserType() {

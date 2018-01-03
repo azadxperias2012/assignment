@@ -5,10 +5,8 @@ public class User {
     public int id = 1;
     public String userType = "User";
 
-    public void displayUserInfo() {
-        System.out.println("\nPrinting User Info: ");
-        System.out.println("id: " + id);
-        System.out.println("userType: " + userType);
+    public User() {
+        System.out.println("User Constructor");
     }
 
     public void printUserType() {
@@ -44,4 +42,12 @@ public class User {
         System.out.println("User: finalMethod");
     }
 
+    public void displayUserInfo() {
+        System.out.println(this);
+    }
+
+    @Override
+    public String toString() {
+        return "\nPrinting User Info: " + "\nid: " + id + "\nuserType: " + userType;
+    }
 }
