@@ -10,7 +10,8 @@ public class User {
 
     public void saveWebLink() {
         System.out.println("User: saveWebLink");
-//        postAReview();
+        postAReview("");
+        staticMethod();
     }
 
     public Review postAReview(String reviewText) {
@@ -21,6 +22,7 @@ public class User {
 
     // Method binding demo
     public static void staticMethod() {
+        System.out.println("User: staticMethod");
     }
 
     public void instanceMethod(double d) {
@@ -29,6 +31,10 @@ public class User {
 
     public void instanceMethod(User u) {
         System.out.println("User: instanceMethod");
+    }
+
+    final public void finalMethod() {
+        System.out.println("User: finalMethod");
     }
 
 }
