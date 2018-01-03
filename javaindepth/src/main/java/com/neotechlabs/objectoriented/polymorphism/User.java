@@ -19,4 +19,16 @@ public class User {
         return review;
     }
 
+    // Method binding demo
+    public static void staticMethod() {
+    }
+
+    public void instanceMethod(double d) {
+        System.out.println("User: instanceMethod");
+    }
+
+    public void instanceMethod(User u) {
+        System.out.println("User: instanceMethod");
+    }
+
 }

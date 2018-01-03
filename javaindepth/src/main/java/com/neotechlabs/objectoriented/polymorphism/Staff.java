@@ -20,4 +20,13 @@ public class Staff extends User {
         return review;
     }
 
+    // Method binding demo
+    public void instanceMethod(int d) {
+        System.out.println("Staff: instanceMethod");
+    }
+
+    public void instanceMethod(Staff s) {
+        System.out.println("Staff: instanceMethod");
+    }
+
 }
