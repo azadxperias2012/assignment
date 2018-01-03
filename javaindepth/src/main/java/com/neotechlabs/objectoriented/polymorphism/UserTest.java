@@ -46,9 +46,14 @@ public class UserTest {
         //staff.instanceMethod(10); // part 2
         //staff.instanceMethod(new Staff());
 
-        User staff = new Editor();
+        //User staff = new Editor();
         //staff.staticMethod(); // early binding
-        staff.saveWebLink();
+        //((Staff) staff).staticMethod();
+        //staff.saveWebLink();
+
+        User staff = new Staff();
+        //System.out.println("User type: " + staff.userType); // early binding
+        staff.displayUserInfo(); // comparison of field hiding & field overriding
     }
 
 }

@@ -3,6 +3,13 @@ package com.neotechlabs.objectoriented.polymorphism;
 public class User {
 
     public int id = 1;
+    public String userType = "User";
+
+    public void displayUserInfo() {
+        System.out.println("\nPrinting User Info: ");
+        System.out.println("id: " + id);
+        System.out.println("userType: " + userType);
+    }
 
     public void printUserType() {
         System.out.println("User");

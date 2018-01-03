@@ -9,6 +9,10 @@ public class Staff extends User {
         System.out.println("super.id: " + super.id);
     }
 
+    public Staff() {
+        userType = "Staff";
+    }
+
     public void printUserType() {
         System.out.println("Staff");
     }
