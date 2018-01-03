@@ -22,7 +22,10 @@ public class UserTest {
         User staff = new Staff();
         User editor = new Editor();
 
-        UserTest ut = new UserTest();
+        staff.postAReview("");
+        ((Staff)staff).printId();
+
+        //UserTest ut = new UserTest();
         //ut.printUserType(user);
         //ut.printUserType(staff);
         //ut.printUserType(editor);
@@ -33,8 +36,8 @@ public class UserTest {
         //editor.saveWebLink();
 
         // Casting & instanceof demo
-        ut.approveReview(new Staff());
-        ut.approveReview(new Editor());
+        //ut.approveReview(new Staff());
+        //ut.approveReview(new Editor());
     }
 
 }
