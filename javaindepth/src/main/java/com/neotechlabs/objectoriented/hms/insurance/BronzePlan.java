@@ -8,7 +8,16 @@ public class BronzePlan extends HealthInsurancePlan {
     }
 
     @Override
-    public double computeMonthlyPremium(double salary) {
-        return (salary * PREMIUM_PERCENTAGE);
+    public double computeMonthlyPremium(double salary, int age, boolean smoking) {
+        return PREMIUM_PERCENTAGE * salary +
+                getOfferedBy().computeMonthlyPremium(this, age, smoking);
+    }
+
+    public double getAgePremium() {
+        return 50.0;
+    }
+
+    public double getSmokePremium() {
+        return 70.0;
     }
 }

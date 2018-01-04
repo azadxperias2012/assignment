@@ -10,6 +10,8 @@ public class User {
     private String email;
     private boolean insured;
     private HealthInsurancePlan insurancePlan;
+    private int age;
+    private boolean smoking;
 
     public long getId() {
         return id;
@@ -65,5 +67,21 @@ public class User {
 
     public void setInsurancePlan(HealthInsurancePlan insurancePlan) {
         this.insurancePlan = insurancePlan;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public boolean isSmoking() {
+        return smoking;
+    }
+
+    public void setSmoking(boolean smoking) {
+        this.smoking = smoking;
     }
 }

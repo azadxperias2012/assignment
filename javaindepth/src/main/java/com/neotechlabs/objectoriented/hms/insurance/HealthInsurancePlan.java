@@ -20,5 +20,13 @@ public abstract class HealthInsurancePlan {
         this.coverage = coverage;
     }
 
-    public abstract double computeMonthlyPremium(double salary);
+    public abstract double computeMonthlyPremium(double salary, int age, boolean smoking);
+
+    public double getAgePremium() {
+        return 0.0;
+    }
+
+    public double getSmokePremium() {
+        return 0.0;
+    }
 }
