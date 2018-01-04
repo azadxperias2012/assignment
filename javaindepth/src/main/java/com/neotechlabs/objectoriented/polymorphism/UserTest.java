@@ -59,7 +59,7 @@ public class UserTest {
         //User staff1 = staff;
         //System.out.println(staff1.hashCode());
 
-        User staff = new Staff(3);
+        //User staff = new Staff(3);
     }
 
 }
