@@ -11,9 +11,16 @@ public class TestClient {
         //a.foo();
         //a.bar();
 
-        C clone = ((X) c).clone();
-        if (clone != c) {
-            System.out.println("Clone created!!");
-        }
+        //C clone = ((X) c).clone();
+        //if (clone != c) {
+            //System.out.println("Clone created!!");
+        //}
+        //c.go();
+
+        new TestClient().lambdaTest(() -> System.out.println("Java In-Depth"));
+    }
+
+    public void lambdaTest(FunctionalInterface fi) {
+        fi.test();
     }
 }

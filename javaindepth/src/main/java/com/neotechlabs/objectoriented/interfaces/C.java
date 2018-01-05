@@ -1,5 +1,8 @@
 package com.neotechlabs.objectoriented.interfaces;
 
-public interface C {
+public interface C extends A {
     void foobar();
+    default void go() {
+        System.out.println("C: go");
+    }
 }
