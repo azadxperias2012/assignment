@@ -6,8 +6,14 @@ public class TestClient {
     }
 
     public static void main(String[] args) {
-        A a = new X();
-        a.foo();
-        a.bar();
+        C c = new X();
+        //A a = new X();
+        //a.foo();
+        //a.bar();
+
+        C clone = ((X) c).clone();
+        if (clone != c) {
+            System.out.println("Clone created!!");
+        }
     }
 }

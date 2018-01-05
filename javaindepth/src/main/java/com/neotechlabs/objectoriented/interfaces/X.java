@@ -1,10 +1,24 @@
 package com.neotechlabs.objectoriented.interfaces;
 
-public class X extends AbstractA implements A, B {
+public class X extends AbstractA implements A, B, C, Cloneable {
     @Override
     public void foo() {
         System.out.println("X: foo");
         System.out.println("A.VAL: " + A.VAL);
         System.out.println("B.VAL: " + B.VAL);
+    }
+
+    @Override
+    public void foobar() {
+        System.out.println("X: foobar");
+    }
+
+    public C clone() {
+        try {
+            return (C) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
