@@ -1,47 +1,58 @@
 package com.neotechlabs.objectoriented;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Student {
 
-    private static int studentCount;
+	public static final int COURSE_ENROLL_LIMIT = 3;
 
-    private static int idInitializer = 1000;
-    private final int id;
-    private String name;
-    private String gender = "male";
+	// variable declarations
+	private static int studentCount;
 
-    public static int getStudentCount() {
-        return studentCount;
-    }
+	private static int idInitializer = 1000;
+	private final int id;
+	private String name;
+	private String gender = "male";
 
-    public String getName() {
-        return name;
-    }
+	private List<Course> enrolledCourses = new ArrayList<>();
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public static int getStudentCount() {
+		return studentCount;
+	}
 
-    public Student(String name, String gender) {
-        this.name = name;
-        this.gender = gender;
+	public String getName() {
+		return name;
+	}
 
-        id = ++idInitializer;
-        studentCount++;
-        System.out.println("ID of " + name + ": " + id);
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public static void main(String[] args) {
-        Student student1 = new Student("joan", "male");
-        Student student2 = new Student("raj", "male");
-        Student student3 = new Student("anita", "female");
+	public Student(String name, String gender) {
+		this.name = name;
+		this.gender = gender;
 
-        System.out.println("Name of student1: " + student1.getName());
-        System.out.println("Name of student2: " + student2.getName());
-        System.out.println("Name of student3: " + student3.getName());
+		id = ++idInitializer;
+		studentCount++;
+		System.out.println("ID of " + name + ": " + id);
+	}
 
-        student1.setName("john");
-        System.out.println("Updated name of student1: " + student1.getName());
+	public void enroll(Course course) {
+		if (enrolledCourses.size() <= COURSE_ENROLL_LIMIT) {
+			enrolledCourses.add(course);
+		}
+		printEnrolledCourses();
+	}
 
-        System.out.println("# students created so far: " + Student.getStudentCount());
-    }
+	private void printEnrolledCourses() {
+		for (Course course : enrolledCourses) {
+			if (course.getDepartment() != null)
+				System.out.println("Course: " + course.getName() + ", Department: " + course.getDepartment().getName());
+		}
+	}
+
+	public List<Course> getEnrolledCourses() {
+		return enrolledCourses;
+	}
 }
