@@ -2,7 +2,7 @@ package com.neotechlabs.thrillio.entities;
 
 public class User {
 	private long id;
-	private String userName;
+	private String email;
 	private String password;
 	private String firstName;
 	private String lastName;
@@ -17,12 +17,12 @@ public class User {
 		this.id = id;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
