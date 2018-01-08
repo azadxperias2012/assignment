@@ -8,17 +8,19 @@ import com.neotechlabs.thrillio.entities.Movie;
 import com.neotechlabs.thrillio.entities.User;
 import com.neotechlabs.thrillio.entities.UserBookmark;
 import com.neotechlabs.thrillio.entities.WebLink;
+import com.neotechlabs.thrillio.partner.Shareable;
 
 public class BookmarkManager {
 	private static BookmarkManager instance = new BookmarkManager();
 	private static BookmarkDao dao = new BookmarkDao();
 
-	private BookmarkManager() {}
+	private BookmarkManager() {
+	}
 
 	public static BookmarkManager getInstance() {
 		return instance;
 	}
-	
+
 	public Movie createMovie(long id, String title, String profileUrl, int releaseYear, String[] cast,
 			String[] directors, String genre, double imdbRating) {
 		Movie movie = new Movie();
@@ -33,7 +35,7 @@ public class BookmarkManager {
 
 		return movie;
 	}
-	
+
 	public WebLink createWebLink(long id, String title, String profileUrl, String url, String host) {
 		WebLink webLink = new WebLink();
 		webLink.setId(id);
@@ -44,7 +46,7 @@ public class BookmarkManager {
 
 		return webLink;
 	}
-	
+
 	public Book createBook(long id, String title, String profileUrl, int publicationYear, String publisher,
 			String[] authors, String genre, double amazonRating) {
 		Book book = new Book();
@@ -68,7 +70,24 @@ public class BookmarkManager {
 		UserBookmark userBookmark = new UserBookmark();
 		userBookmark.setUser(user);
 		userBookmark.setBookmark(bookmark);
-		
+
 		dao.saveUserBookmark(userBookmark);
+	}
+
+	public void setKidFriendlyStatus(User user, String kidFriendlyStatus, Bookmark bookmark) {
+		bookmark.setKidFriendlyStatus(kidFriendlyStatus);
+		bookmark.setKidFriendlyMarkedBy(user);
+		
+		System.out.println(
+				"Kid-friendly status: " + kidFriendlyStatus + ", marked by " + user.getEmail() + ", " + bookmark);
+	}
+
+	public void share(User user, Bookmark bookmark) {
+		bookmark.setSharedBy(user);
+
+		System.out.println("Data to be Shared");
+		if (bookmark instanceof Shareable) {
+			System.out.println(((Shareable) bookmark).getItemData());
+		}
 	}
 }
