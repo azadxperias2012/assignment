@@ -1,6 +1,8 @@
 package com.neotechlabs.thrillio.entities;
 
-public class Bookmark {
+import com.neotechlabs.thrillio.constants.KidFriendlyStatus;
+
+public abstract class Bookmark {
 	private long id;
 	private String title;
 	private String profileUrl;
@@ -28,4 +30,6 @@ public class Bookmark {
 	public void setProfileUrl(String profileUrl) {
 		this.profileUrl = profileUrl;
 	}
+	
+	public abstract boolean isKidFriendlyEligible();
 }
