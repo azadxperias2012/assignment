@@ -1,11 +1,15 @@
 package com.neotechlabs.thrillio.managers;
 
+import com.neotechlabs.thrillio.dao.BookmarkDao;
+import com.neotechlabs.thrillio.dao.UserDao;
 import com.neotechlabs.thrillio.entities.Book;
+import com.neotechlabs.thrillio.entities.Bookmark;
 import com.neotechlabs.thrillio.entities.Movie;
 import com.neotechlabs.thrillio.entities.WebLink;
 
 public class BookmarkManager {
 	private static BookmarkManager instance = new BookmarkManager();
+	private static BookmarkDao dao = new BookmarkDao();
 
 	private BookmarkManager() {}
 
@@ -52,5 +56,9 @@ public class BookmarkManager {
 		book.setAmazonRating(amazonRating);
 
 		return book;
+	}
+
+	public Bookmark[][] getBookmarks() {
+		return dao.getBookmarks();
 	}
 }

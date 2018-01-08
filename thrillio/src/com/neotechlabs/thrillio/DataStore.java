@@ -89,4 +89,12 @@ public class DataStore {
 		bookmarks[2][4] = bookmarkManager.createBook(4004, "Effective Java Programming Language Guide", "", 2007,
 				"Prentice Hall", new String[] { "Joshua Bloch" }, BookGenre.TECHNICAL, 4.9);
 	}
+
+	public static User[] getUsers() {
+		return users;
+	}
+
+	public static Bookmark[][] getBookmarks() {
+		return bookmarks;
+	}
 }
