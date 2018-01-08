@@ -5,6 +5,8 @@ import com.neotechlabs.thrillio.dao.UserDao;
 import com.neotechlabs.thrillio.entities.Book;
 import com.neotechlabs.thrillio.entities.Bookmark;
 import com.neotechlabs.thrillio.entities.Movie;
+import com.neotechlabs.thrillio.entities.User;
+import com.neotechlabs.thrillio.entities.UserBookmark;
 import com.neotechlabs.thrillio.entities.WebLink;
 
 public class BookmarkManager {
@@ -60,5 +62,13 @@ public class BookmarkManager {
 
 	public Bookmark[][] getBookmarks() {
 		return dao.getBookmarks();
+	}
+
+	public void saveUserBookmark(User user, Bookmark bookmark) {
+		UserBookmark userBookmark = new UserBookmark();
+		userBookmark.setUser(user);
+		userBookmark.setBookmark(bookmark);
+		
+		dao.saveUserBookmark(userBookmark);
 	}
 }

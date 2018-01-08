@@ -17,7 +17,7 @@ public class Lauch {
 		users = UserManager.getInstance().getUsers();
 		bookmarks = BookmarkManager.getInstance().getBookmarks();
 		
-		System.out.println("2. Printing data ...");
+		System.out.println("Printing data ...");
 		printUserData();
 		printBookmarkData();
 	}
@@ -36,8 +36,16 @@ public class Lauch {
 		}
 	}
 
+	private static void startBookmarking() {
+		System.out.println("\n2. Bookmarking ...");
+		for (User user : users) {
+			View.bookmark(user, bookmarks);
+		}
+	}
+
 	public static void main(String[] args) {
 		loadData();
+		startBookmarking();
 	}
 
 }
