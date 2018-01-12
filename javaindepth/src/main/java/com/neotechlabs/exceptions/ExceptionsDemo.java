@@ -39,7 +39,10 @@ public class ExceptionsDemo {
 			//System.out.println("e.getMessage(): "+ e.getMessage());
 			
 			// Item 63
-			System.out.println("e.getElementName(): "+ e.getElementName());
+			//System.out.println("e.getElementName(): "+ e.getElementName());
+			
+			// Item 61: Throw exceptions appropriate to the abstraction
+			e.getCause().printStackTrace();
 		} finally {
 			System.out.println("Inside share's finally ...");
 		}
