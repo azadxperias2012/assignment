@@ -14,7 +14,7 @@ public class APIParser {
 				responseCode = Integer.parseInt(response.substring(beginIndex, endIndex));
 			}
 		} catch (NumberFormatException e) {
-			throw new APIFormatChangeException();
+			throw new APIFormatChangeException(response, "code", partner);
 		}
 		return responseCode ;
 	}
