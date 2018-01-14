@@ -2,12 +2,15 @@ package com.neotechlabs.io;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class IODemo {
 	private static void applyEncoding() {
@@ -86,10 +89,44 @@ public class IODemo {
 		elapsedTime = System.nanoTime() - startTime;
 		System.out.println("fileCopyWithBufferAndArray: " + (elapsedTime / 1000000.0) + " msec");
 	}
+	
+	private static void readFromStandardInput() {
+		System.out.println("\nInside readFromStandardInput ...");
+		String data;
+		/*
+		System.out.println("Enter \"start\" to continue (Using BufferedReader): ");
+		
+		try (BufferedReader in = new BufferedReader(new InputStreamReader(System.in, "UTF-8"))) {
+			while ((data = in.readLine()) != null && !data.equals("start")) {
+				System.out.println("\nDid not enter \"start\". Try again: ");
+			}
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Correct!!");
+		*/
+		
+		System.out.println("Enter \"start\" to continue (Using java.util.Scanner): ");
+		try (Scanner scanner = new Scanner(System.in)) {
+			while (!(data = scanner.nextLine()).equals("start")) {
+				System.out.println("\nDid not enter \"start\". Try again: ");
+			}
+			System.out.println("Correct!!");
+			
+			System.out.println("Now enter the start code: ");
+			int code = scanner.nextInt(); // other methods: nextLong, nextDouble, etc
+			System.out.println("Thanks. You entered code: " + code);
+		}
+	}
 
 	public static void main(String[] args) {
-		// applyEncoding();
-		// fileCopyNoBuffer();
-		fileCopyWithBufferAndArray();
+		//applyEncoding();
+		//fileCopyNoBuffer();
+		//fileCopyWithBufferAndArray();
+		readFromStandardInput();		
 	}
 }
