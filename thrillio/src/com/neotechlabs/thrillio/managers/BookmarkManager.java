@@ -1,5 +1,8 @@
 package com.neotechlabs.thrillio.managers;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+
 import com.neotechlabs.thrillio.dao.BookmarkDao;
 import com.neotechlabs.thrillio.dao.UserDao;
 import com.neotechlabs.thrillio.entities.Book;
@@ -9,6 +12,8 @@ import com.neotechlabs.thrillio.entities.User;
 import com.neotechlabs.thrillio.entities.UserBookmark;
 import com.neotechlabs.thrillio.entities.WebLink;
 import com.neotechlabs.thrillio.partner.Shareable;
+import com.neotechlabs.thrillio.util.HttpConnect;
+import com.neotechlabs.thrillio.util.IOUtil;
 
 public class BookmarkManager {
 	private static BookmarkManager instance = new BookmarkManager();
@@ -70,6 +75,24 @@ public class BookmarkManager {
 		UserBookmark userBookmark = new UserBookmark();
 		userBookmark.setUser(user);
 		userBookmark.setBookmark(bookmark);
+		
+		if (bookmark instanceof WebLink) {
+			try {
+				String url = ((WebLink) bookmark).getUrl();
+				if (!url.endsWith(".pdf")) {
+					String webpage = HttpConnect.download(url);
+					if (webpage != null) {
+						IOUtil.write(webpage, bookmark.getId());
+					}
+				}
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 		dao.saveUserBookmark(userBookmark);
 	}
