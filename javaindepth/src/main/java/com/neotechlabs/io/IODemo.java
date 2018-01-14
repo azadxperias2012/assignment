@@ -24,6 +24,7 @@ public class IODemo {
 	
 	// By convention, static nested classes should be placed before static methods
 	public static class SerializableDemo implements Serializable {
+		private static final long serialVersionUID = 2786537551783063223L;
 		private String name;
 		public String getName() { return name; }
 		public void setName(String name) { this.name = name; }
