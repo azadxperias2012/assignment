@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.TreeMap;
 
 import com.neotechlabs.Student;
 
@@ -124,10 +125,32 @@ public class MapDemo {
 		System.out.println(lruCache);
 	}
 	
+	private static void treeMapDemo() {
+		System.out.println("\nInside treeMapDemo ...");
+		TreeMap<String, Integer> map1 = new TreeMap<>();
+		map1.put("John", 25);
+		map1.put("Raj", 29);
+		map1.put("Anita", 23);
+		
+		System.out.println(map1);
+		
+		System.out.println("Iterating using entrySet ...");
+		Set<Entry<String, Integer>> mappings = map1.entrySet();
+		for (Entry<String, Integer> mapping : mappings) {
+			System.out.println("Name: " + mapping.getKey() +", Age:" + mapping.getValue());
+			if(mapping.getKey().equals("John")) {
+				mapping.setValue(26);
+			}
+		}
+		System.out.println(map1);
+		map1.floorEntry("Raj").setValue(22);
+	}
+	
 	public static void main(String[] args) {
 		//hashMapDemo();
 		//immutableKeysDemo();
-		lruCacheTest();
+		//lruCacheTest();
+		treeMapDemo();
 	}
 }
 
