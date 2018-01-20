@@ -6,11 +6,11 @@ public class Student {
     String name;
     String gender = "male";
 
-    Student(String name) {
+    public Student(String name) {
         this.name = name;
     }
 
-    Student(int id, String name) {
+    public Student(int id, String name) {
         this(name);
         this.id = id;
     }
@@ -19,5 +19,9 @@ public class Student {
         this.name = name;
         return true;
     }
+
+	public void setName(String string) {
+		this.name = name;
+	}
 
 }

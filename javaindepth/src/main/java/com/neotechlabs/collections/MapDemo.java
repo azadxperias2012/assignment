@@ -1,13 +1,16 @@
 package com.neotechlabs.collections;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class MapDemo {
-	
+import com.neotechlabs.Student;
+
+public class MapDemo {	
 	private static void hashMapDemo() {
 		System.out.println("\nInside hashMapDemo ...");
 		Map<String, Integer> map1 = new HashMap<>();
@@ -77,9 +80,28 @@ public class MapDemo {
 			System.out.println(value);
 		}
 	}
-
-	public static void main(String[] args) {
-		hashMapDemo();
+	
+	private static void immutableKeysDemo() {
+		System.out.println("\nInside immutableKeysDemo ...");
+		List<Integer> list = new ArrayList<>();
+		list.add(1);
+		
+		Map<List<Integer>, Integer> map = new HashMap<>();
+		map.put(list, 1);
+		
+		list.add(2);
+		System.out.println(map.get(list));
+		
+		Student s = new Student(1, null);
+		Map<Student, Integer> map2 = new HashMap<>();
+		map2.put(s, 2);
+		
+		s.setName("John");
+		System.out.println(map2.get(s));
 	}
 
+	public static void main(String[] args) {
+		//hashMapDemo();
+		immutableKeysDemo();
+	}
 }
