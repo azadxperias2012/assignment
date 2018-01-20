@@ -3,6 +3,7 @@ package com.neotechlabs.collections;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -100,8 +101,47 @@ public class MapDemo {
 		System.out.println(map2.get(s));
 	}
 
+	private static void lruCacheTest() {
+		System.out.println("\nInside lruCacheTest ...");
+		// constructor for LRU cache
+		//Map<String, String> lruCache = new LinkedHashMap<>(16, 0.75f, true);
+		Map<String, String> lruCache = new LRUCache<>(16, 0.75f, true);
+		lruCache.put("a", "A");
+		lruCache.put("b", "B");
+		lruCache.put("c", "C");
+		System.out.println(lruCache);
+		
+		lruCache.get("a"); // multiple gets to "a" will not make a difference
+		lruCache.get("a");
+		lruCache.get("a");
+		System.out.println(lruCache);
+		lruCache.get("b");
+		System.out.println(lruCache);
+		
+		lruCache.put("d", "D");
+		System.out.println(lruCache);
+		lruCache.put("e", "E");
+		System.out.println(lruCache);
+	}
+	
 	public static void main(String[] args) {
 		//hashMapDemo();
-		immutableKeysDemo();
+		//immutableKeysDemo();
+		lruCacheTest();
+	}
+}
+
+class LRUCache<K, V> extends LinkedHashMap<K, V> {
+	//private static final long serialVersionUID = 3059513327180672467L;
+	private static final int MAX_ENTRIES = 3;
+	
+	public LRUCache(int initialCapacity, float loadFactor, boolean accessOrder) {
+		super(initialCapacity, loadFactor, accessOrder);
+	}
+	
+	// Invoked by put and putAll after inserting a new entry into the map
+	public boolean removeEldestEntry(java.util.Map.Entry<K, V> eldest) {
+		return size() > MAX_ENTRIES;
+		// return false; // same as normal linked hash map
 	}
 }
