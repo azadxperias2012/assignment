@@ -101,15 +101,41 @@ public class SetDemo {
 		System.out.println("subSet: " + subSet);
 	}
 	
+	public static Set<Book> treeSetDemo3(Comparator comparator) {
+		Book book1 = new Book("Harry Potter", "J.K.Rowling", 1997);
+		Book book2 = new Book("Harry Potter", "J.K.Rowling", 1997);
+		Book book3 = new Book("Walden", "Henry David Thoreau", 1854);
+		Book book4 = new Book("Effective Java", "Joshua Bloch", 2008);
+		Book book5 = new Book("The Last Lecture", "Randy Pausch", 2008);
+			  
+		Set<Book> books = new TreeSet<>(comparator);
+		books.add(book1);
+		books.add(book2);
+		books.add(book3);
+		books.add(book4);
+		books.add(book5);
+	      
+	    for (Book book : books) {
+	    	System.out.println(book);
+	    }
+	    
+	    System.out.println();
+	    
+	    return books;
+	}
+	
 	public static void main(String[] args) {
 		//hashSetDemo();
 		//linkedHashSetDemo();
 		//treeSetDemo();
-		treeSetDemo2();
+		//treeSetDemo2();
+		treeSetDemo3(null);
+		treeSetDemo3(new PubDateAscComparator());
+		treeSetDemo3(new PubDateDescComparator());
 	}
 }
 
-class Book /*implements Comparable*/ {
+class Book implements Comparable {
 	private String title;
 	private String author;
 	private int year;
@@ -194,29 +220,51 @@ class Book /*implements Comparable*/ {
 		return true;
 	}
 	
-//	@Override
-//	public int compareTo(Object book) {
-//		// Utilizing String's compareTo
-//		return getTitle().compareTo(((Book)book).getTitle());
-//	}
+	@Override
+	public int compareTo(Object book) {
+		// Utilizing String's compareTo
+		return getTitle().compareTo(((Book)book).getTitle());
+	}
 }
 
 class TitleComparator implements Comparator {
-
 	@Override
 	public int compare(Object o1, Object o2) {
 		// TODO Auto-generated method stub
 		return ((Book)o1).getTitle().compareTo(((Book)o2).getTitle());
 	}
-	
 }
 
 class AuthorComparator implements Comparator {
-
 	@Override
 	public int compare(Object o1, Object o2) {
 		// TODO Auto-generated method stub
 		return ((Book)o1).getAuthor().compareTo(((Book)o2).getAuthor());
 	}
-	
+}
+
+class PubDateAscComparator implements Comparator {
+	@Override
+	public int compare(Object o1, Object o2) {
+		Integer year1 = ((Book)o1).getYear();
+		Integer year2 = ((Book)o2).getYear();
+		if(year1.equals(year2)) {
+			return ((Book)o1).getAuthor().compareTo(((Book)o2).getAuthor());
+		}
+		return year1.compareTo(year2);
+	}
+}
+
+class PubDateDescComparator implements Comparator {
+	@Override
+	public int compare(Object o1, Object o2) {
+		Integer year1 = ((Book)o1).getYear();
+		Integer year2 = ((Book)o2).getYear();
+		if(year1.equals(year2)) {
+			return ((Book)o1).getAuthor().compareTo(((Book)o2).getAuthor());
+		}
+		
+		int compareTo = year1.compareTo(year2);
+		return compareTo == 1 ? -1: 1;
+	}
 }
