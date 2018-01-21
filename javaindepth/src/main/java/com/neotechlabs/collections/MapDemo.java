@@ -143,7 +143,8 @@ public class MapDemo {
 			}
 		}
 		System.out.println(map1);
-		map1.floorEntry("Raj").setValue(22);
+		// throws unsupported operation exception
+		//map1.floorEntry("Raj").setValue(22);
 	}
 	
 	public static void main(String[] args) {
