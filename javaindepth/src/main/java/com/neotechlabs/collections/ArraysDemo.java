@@ -3,6 +3,8 @@ package com.neotechlabs.collections;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.IntBinaryOperator;
+import java.util.function.IntUnaryOperator;
 
 public class ArraysDemo {
 	
@@ -87,8 +89,50 @@ public class ArraysDemo {
 		System.out.println(ia[0][2]);
 	}
 
-	public static void main(String[] args) {
-		sequential();
+	private static void parallel() {
+		System.out.println("\nInside parallel ...");
+		// For large arrays on multi-core. Min size atleast 1 >> 13 = 8192
+		int[] iArray = {23, 4, 59};
+		Arrays.parallelSort(iArray);
+		System.out.println("iArray parallel sort:" + Arrays.toString(iArray));
+		
+		IntBinaryOperatorImpl intBinaryOperatorImpl = new IntBinaryOperatorImpl();
+		Arrays.parallelPrefix(iArray, intBinaryOperatorImpl);
+		System.out.println("Parallel Prefix:" + Arrays.toString(iArray));
+		
+		IntUnaryOperatorImpl intUnaryOperatorImpl = new IntUnaryOperatorImpl();
+		intUnaryOperatorImpl.setiArray(iArray);
+		Arrays.parallelSetAll(iArray, intUnaryOperatorImpl);
+		System.out.println("Parallel Set All:" + Arrays.toString(iArray));
 	}
 
+	public static void main(String[] args) {
+		//sequential();
+		parallel();
+	}
+
+}
+
+class IntBinaryOperatorImpl implements IntBinaryOperator {
+	@Override
+	public int applyAsInt(int left, int right) {
+		return left + right;
+	}
+}
+
+class IntUnaryOperatorImpl implements IntUnaryOperator {
+	private int[] iArray;
+
+	public void setiArray(int[] iArray) {
+		this.iArray = iArray;
+	}
+
+	@Override
+	public int applyAsInt(int i) { // passes the index of the array
+		if (iArray != null) {
+			return iArray[i] + 5;
+		} else {
+			return i;
+		}
+	}
 }
