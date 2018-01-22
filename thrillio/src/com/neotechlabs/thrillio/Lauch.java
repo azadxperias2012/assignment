@@ -1,5 +1,7 @@
 package com.neotechlabs.thrillio;
 
+import java.util.List;
+
 import com.neotechlabs.thrillio.entities.Bookmark;
 import com.neotechlabs.thrillio.entities.User;
 import com.neotechlabs.thrillio.managers.BookmarkManager;
@@ -7,8 +9,8 @@ import com.neotechlabs.thrillio.managers.UserManager;
 
 public class Lauch {
 	
-	private static User[] users;
-	private static Bookmark[][] bookmarks;
+	private static List<User> users;
+	private static List<List<Bookmark>> bookmarks;
 
 	private static void loadData() {
 		System.out.println("1. Loading data ...");
@@ -16,10 +18,6 @@ public class Lauch {
 		
 		users = UserManager.getInstance().getUsers();
 		bookmarks = BookmarkManager.getInstance().getBookmarks();
-		
-//		System.out.println("Printing data ...");
-//		printUserData();
-//		printBookmarkData();
 	}
 
 	private static void printUserData() {
@@ -29,7 +27,7 @@ public class Lauch {
 	}
 
 	private static void printBookmarkData() {
-		for (Bookmark[] bookmarkList : bookmarks) {
+		for (List<Bookmark> bookmarkList : bookmarks) {
 			for (Bookmark bookmark : bookmarkList) {
 				System.out.println(bookmark);
 			}
@@ -37,7 +35,6 @@ public class Lauch {
 	}
 
 	private static void start() {
-//		System.out.println("\n2. Bookmarking ...");
 		for (User user : users) {
 			View.browse(user, bookmarks);
 		}

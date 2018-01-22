@@ -1,5 +1,7 @@
 package com.neotechlabs.thrillio;
 
+import java.util.List;
+
 import com.neotechlabs.thrillio.constants.KidFriendlyStatus;
 import com.neotechlabs.thrillio.constants.UserType;
 import com.neotechlabs.thrillio.controllers.BookmarkController;
@@ -9,21 +11,21 @@ import com.neotechlabs.thrillio.partner.Shareable;
 
 public class View {
 
-	public static void browse(User user, Bookmark[][] bookmarks) {
+	public static void browse(User user, List<List<Bookmark>> bookmarks) {
 		System.out.println("\n" + user.getEmail() + " is browsing ...");
 		int bookmarkCount = 0;
 
-		for (Bookmark[] bookmarkList : bookmarks) {
+		for (List<Bookmark> bookmarkList : bookmarks) {
 			for (Bookmark bookmark : bookmarkList) {
 				// Bookmarking!!
-				if (bookmarkCount < DataStore.USER_BOOKMARK_LIMIT) {
+				//if (bookmarkCount < DataStore.USER_BOOKMARK_LIMIT) {
 					boolean isBookmarked = getBookmarkDecision(bookmark);
 					if (isBookmarked) {
 						bookmarkCount++;
 						BookmarkController.getInstance().saveUserBookmark(user, bookmark);
 						System.out.println("New Item Bookmarked -- " + bookmark);
 					}
-				}
+				//}
 
 				if (user.getUserType().equals(UserType.EDITOR) || user.getUserType().equals(UserType.EDITOR)) {
 

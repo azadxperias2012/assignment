@@ -1,5 +1,7 @@
 package com.neotechlabs.thrillio.managers;
 
+import java.util.List;
+
 import com.neotechlabs.thrillio.dao.UserDao;
 import com.neotechlabs.thrillio.entities.User;
 
@@ -27,7 +29,7 @@ public class UserManager {
 		return user;
 	}
 
-	public User[] getUsers() {
+	public List<User> getUsers() {
 		return dao.getUsers();
 	}
 }

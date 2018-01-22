@@ -18,8 +18,7 @@ public class DataStore {
 
 	private static List<User> users = new ArrayList<>();
 	private static List<List<Bookmark>> bookmarks = new ArrayList<>();
-	private static UserBookmark[] userBookmarks = new UserBookmark[TOTAL_USER_COUNT * USER_BOOKMARK_LIMIT];
-	private static int bookmarkIndex = 0;
+	private static List<UserBookmark> userBookmarks = new ArrayList<>();
 
 	public static void loadData() {
 		loadUsers();
@@ -101,8 +100,7 @@ public class DataStore {
 	}
 
 	public static void add(UserBookmark userBookmark) {
-		userBookmarks[bookmarkIndex] = userBookmark;
-		bookmarkIndex++;
+		userBookmarks.add(userBookmark);
 	}
 
 }

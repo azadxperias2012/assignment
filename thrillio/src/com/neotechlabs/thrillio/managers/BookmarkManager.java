@@ -2,6 +2,7 @@ package com.neotechlabs.thrillio.managers;
 
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import com.neotechlabs.thrillio.dao.BookmarkDao;
 import com.neotechlabs.thrillio.dao.UserDao;
@@ -67,7 +68,7 @@ public class BookmarkManager {
 		return book;
 	}
 
-	public Bookmark[][] getBookmarks() {
+	public List<List<Bookmark>> getBookmarks() {
 		return dao.getBookmarks();
 	}
 
