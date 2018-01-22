@@ -1,9 +1,12 @@
 package com.neotechlabs.generics;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
-public class GenericsDemo {
+public class GenericsDemo<T extends ArrayList & Serializable> {
 
 	public static void main(String[] args) {
 		Container<String> stringStore = new Store<>();
@@ -17,6 +20,14 @@ public class GenericsDemo {
 		Container<List<Integer>> listStore = new Store<>();
 		listStore.set(Arrays.asList(1, 2, 3));
 		System.out.println(listStore.get());
+		
+		//GenericsDemo<List> list1 = new GenericsDemo<>();
+		GenericsDemo<ArrayList> list2 = new GenericsDemo<>();
+		//GenericsDemo<Collection> list3 = new GenericsDemo<>(); // Not possible to have class or subclass other than List
+	}
+	
+	public void go(T list) {
+		list.add(0, new Object());
 	}
 
 }
