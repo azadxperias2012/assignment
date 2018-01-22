@@ -28,12 +28,42 @@ public class GenericsDemo<T extends ArrayList & Serializable> {
 		// raw type demo
 		//rawTypeDemo();
 		
-		List<String> l1 = Arrays.asList("a", "b", "c");
-		List<String> l2 = Arrays.asList("b", "c", "d");
-		getCommonElemetsCount(l1, l2);
+		List<String> strList1 = Arrays.asList("a", "b", "c");
+		List<String> strList2 = Arrays.asList("b", "c", "d");
+		//getCommonElemetsCount(strList1, strList2);
+		
+		// wild-cards
+		getCommonElemetsCountWithWildcard(strList1, strList2);
+		
+		Container<?> someStore = stringStore;
+		Object object = someStore.get();
+		System.out.println("Stored element: " + object);
+		
+		List<Integer> intList1 = Arrays.asList(1, 2);
+		List<Integer> intList2 = Arrays.asList(3, 4);
+		//invalidAggregate(intList1, intList2, new ArrayList());
 	}
 	
+//	private static void invalidAggregate(List<?> l1, List<?> l2, List<?> l3) {
+//		// cannot access class level types
+//		l3.addAll(l1); // null ok
+//		l3.addAll(l2);
+//	}
+
 	private static int getCommonElemetsCount(List list1, List list2) {
+		System.out.println("\nInside getCommonElemetsCount ...");
+		int count = 0;
+		for (Object element : list1) {
+			if (list2.contains(element)) {
+				count++;
+			}
+		}
+		System.out.println("Common elements count: " + count);
+		return count;
+	}
+	
+	private static int getCommonElemetsCountWithWildcard(List<?> list1, List<?> list2) {
+		System.out.println("\nInside getCommonElemetsCountWithWildcard ...");
 		int count = 0;
 		for (Object element : list1) {
 			if (list2.contains(element)) {
