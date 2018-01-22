@@ -42,6 +42,9 @@ public class GenericsDemo<T extends ArrayList & Serializable> {
 		List<Integer> intList1 = Arrays.asList(1, 2);
 		List<Integer> intList2 = Arrays.asList(3, 4);
 		//invalidAggregate(intList1, intList2, new ArrayList());
+		
+		//go(new ArrayList<Integer>());
+		go(new Integer[1]);
 	}
 	
 //	private static void invalidAggregate(List<?> l1, List<?> l2, List<?> l3) {
@@ -84,10 +87,18 @@ public class GenericsDemo<T extends ArrayList & Serializable> {
 		
 	}
 
-	public void go(T list) {
-		list.add(0, new Object());
-	}
+//	public void go(T list) {
+//		list.add(0, new Object());
+//	}
 
+	// Invariance
+	private static void go(List<Number> list) {}
+	
+	// Covariance
+	private static void go(Number[] list) {
+		// throws ArrayStoreException (runtime) if an Integer array is passed
+		list[0] = 24.4;
+	}
 }
 
 class HalfIntegrator {
