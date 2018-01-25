@@ -5,6 +5,7 @@ import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -62,7 +63,52 @@ public class GenericsDemo<T> {
 		//GenericsDemo.invarianceWorkaround(intList3);
 		GenericsDemo.invarianceWorkaround(intList3, 25);
 		System.out.println(intList3.get(0));
+		
+		boundedWildCards();
 	}
+	
+	static void boundedWildCards() {
+		System.out.println("\nInside boundedWildCards ...");
+		List<Integer> intList = Arrays.asList(11, 22, 33);
+		display(intList);
+		List<Double> doubletList = Arrays.asList(11.11, 22.22, 33.33);
+		display(doubletList);
+		
+		List<Number> numList = new ArrayList<>();
+		aggregateWithConsumer(intList, doubletList, numList);
+		System.out.println("numList: " + numList);
+		
+		Collections.addAll(new ArrayList<Object>(), 1, 2);
+		Collections.copy(numList, doubletList);
+		System.out.println("numList after copy: " + numList);
+		System.out.println("Collections.disjoint: " + Collections.disjoint(intList, doubletList));
+		
+		Collections.replaceAll(numList, 11.11, 44.44);
+		System.out.println("numList after replaceAll: " + numList);
+	}
+	
+	// Changing to super will give compiler error as with super
+	// List<Object> can be passed and here Number is the type in for-loop.
+	// Would work if type in for-loop is changed to Object
+	static void display(List<? extends Number> list) {
+		for (Number element : list) {
+			System.out.println("display()/element: " + element/*.intValue()*/);
+		}
+		//list.add(22);
+	}
+
+	public static <E> void aggregateWithConsumer(List<? extends E> l1,
+			List<? extends E> l2, List<? super E> l3) {
+		l3.addAll(l1);
+		l3.addAll(l2);
+	}
+	
+	// or generic method
+//	static <T extends Number> void display(List<T> list) {
+//		for (Number element : list) {
+//			System.out.println("display()/element: " + element/*.intValue()*/);
+//		}
+//	}
 	
 	// Invariance workaround ~ For harmless scenarios where type safety is not a concern
 	static <T extends Number> void invarianceWorkaround(List<T> list) {
