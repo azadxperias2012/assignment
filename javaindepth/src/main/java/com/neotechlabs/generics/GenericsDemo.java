@@ -1,12 +1,20 @@
 package com.neotechlabs.generics;
 
 import java.io.Serializable;
+import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
-public class GenericsDemo<T extends ArrayList & Serializable> {
+//public class GenericsDemo<T extends ArrayList & Serializable> {
+public class GenericsDemo<T> {
+	
+	GenericsDemo() {}
+
+	// Generic constructors are rare!!
+	<E extends T> GenericsDemo(E object) { }
 
 	public static void main(String[] args) {
 		Container<String> stringStore = new Store<>();
@@ -44,7 +52,9 @@ public class GenericsDemo<T extends ArrayList & Serializable> {
 		//invalidAggregate(intList1, intList2, new ArrayList());
 		
 		//go(new ArrayList<Integer>());
-		go(new Integer[1]);
+		//go(new Integer[1]);
+		
+		genericMethodsDemo();
 	}
 	
 //	private static void invalidAggregate(List<?> l1, List<?> l2, List<?> l3) {
@@ -98,6 +108,119 @@ public class GenericsDemo<T extends ArrayList & Serializable> {
 	private static void go(Number[] list) {
 		// throws ArrayStoreException (runtime) if an Integer array is passed
 		list[0] = 24.4;
+	}
+
+	// Demonstrates:
+	// 		(a) Type argument inference via method arguments & target type
+	// 		(b) Explicit type argument specification
+	// 		(c) Generic Constructor
+	// 		(d) aggregate method fix from wilcard demo
+	private static void genericMethodsDemo() {
+		System.out.println("\nInside genericMethodsDemo ...");
+		
+		// Type argument inference via method arguments
+		typeArgInference(22.0);
+		typeArgInference("Java");
+		
+		// Compile-time type-safety benefit in a generic method
+		//Double val = typeArgInference1("Java");
+		
+		// Compile-time type-safety benefit in a generic method ~ wrong arguments
+		Integer[] na = new Integer[100];
+		Collection<Integer> cs = new ArrayList<>();
+		//Collection<Number> cs = new ArrayList<>(); ~ no error since Number is base to Integer
+		//Collection<String> cs = new ArrayList<>(); ~ compiler error
+		arrayToCollection(na, cs);
+		
+		// Type argument inference via target type
+		String strVal = typeArgInferenceFromTargetType1();
+		// Compiler places implicit Integer cast. But, method returns string!!
+		//Integer intVal = typeArgInferenceFromTargetType1(); ~ Runtime exception thrown
+		
+		// Type arg inference in method invocation context ~ works from Java 8
+		GenericsDemo.targetTypeInvoker1(typeArgInferenceFromTargetType2());
+		GenericsDemo.targetTypeInvoker1(new ArrayList<>());
+		GenericsDemo.targetTypeInvoker2(typeArgInferenceFromTargetType2());
+		List<String> strList = GenericsDemo.targetTypeInvoker2(typeArgInferenceFromTargetType2());
+		GenericsDemo.targetTypeInvoker2(new ArrayList<>());
+		List<String> strList2 = GenericsDemo.targetTypeInvoker2(new ArrayList<>());
+		
+		// Inferring most specific super-type
+		Serializable obj = typeArgInference3("", new ArrayList());
+		AbstractCollection c = typeArgInference4(new ArrayList(), new HashSet());
+		
+		GenericsDemo.<String>uselessGenericMethod(); // type witness
+		
+		// Type arg for both constructor & new expression inference:
+		//	(i) inferred from constructor argument. If that's not possible then
+		//	(ii) context comes into play, e.g., target type & method invocation content
+		new GenericsDemo<Number>(12.0); // T is Number, E is Double
+		new GenericsDemo<>(12.0); // T & E is Double
+		new <Double>GenericsDemo<Number>(12.0); // Type witness!!
+		//new <Double>GenericsDemo<>(12.0); ~ compiler error
+		GenericsDemo<Number> gd = new GenericsDemo<>(12.0); // To avaid invariance, smartly inferred from target type
+		
+		List<Integer> intList1 = Arrays.asList(1, 2);
+		List<Integer> intList2 = Arrays.asList(3, 4);
+		List<Integer> intList3 = new ArrayList<>();
+		aggregate(intList1, intList2, intList3);
+		System.out.println("intList3: " + intList3);
+	}
+
+	private static <E> void aggregate(List<E> l1, List<E> l2, List<E> l3) {
+		l3.addAll(l1);
+		l3.addAll(l2);
+	}
+
+	private static <T> void uselessGenericMethod() {
+		T t = (T) new Integer(2);
+		System.out.println("typeWitness: " + t.getClass().getName());
+	}
+
+	private static void targetTypeInvoker1(List<String> list) {
+		for (String s : list) {
+			System.out.println("Element: " + s);
+		}
+	}
+	
+	private static <T> List<T> targetTypeInvoker2(List<T> list) {
+		return list;
+	}
+
+	private static <T> T typeArgInferenceFromTargetType1() {
+		return (T) "abc"; // T would be Object after type erasure
+	}
+	
+	private static <T> List<T> typeArgInferenceFromTargetType2() {
+		List<String> list = new ArrayList<>();
+		list.add("abc");
+
+		return (List<T>) list;
+	}
+
+	private static <T> void arrayToCollection(T[] na, Collection<T> cs) {
+		for (T o : na) {
+			cs.add(o);
+		}
+	}
+
+	private static <T> void typeArgInference(T object) {
+		System.out.println("Type Argument: " + object.getClass().getName());
+	}
+	
+	private static <T> T typeArgInference1(T object) {
+		System.out.println("Type Argument: " + object.getClass().getName());
+		return object;
+	}
+	
+	private static <T> T typeArgInference3(T object1, T object2) {
+		System.out.println("Most specific type argument inferred: " + object2.getClass().getName());
+		return object1;
+	}
+	
+	private static <T> T typeArgInference4(T object1, T object2) {
+		System.out.println("Most specific type argument inferred: " + object2.getClass().getName());
+		return object1;
 	}
 }
 
