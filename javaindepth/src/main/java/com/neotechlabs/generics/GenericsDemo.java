@@ -54,7 +54,26 @@ public class GenericsDemo<T> {
 		//go(new ArrayList<Integer>());
 		//go(new Integer[1]);
 		
-		genericMethodsDemo();
+		//genericMethodsDemo();
+		
+		//GenericsDemo.invarianceWorkaround(new ArrayList<String>());
+		GenericsDemo.invarianceWorkaround(new ArrayList<Number>());
+		List<Integer> intList3 = new ArrayList<>();
+		//GenericsDemo.invarianceWorkaround(intList3);
+		GenericsDemo.invarianceWorkaround(intList3, 25);
+		System.out.println(intList3.get(0));
+	}
+	
+	// Invariance workaround ~ For harmless scenarios where type safety is not a concern
+	static <T extends Number> void invarianceWorkaround(List<T> list) {
+//		list.add(new Double(23.3));
+
+		T element = (T) new Double(23.3); // typically element of type T will be added
+		list.add(element);
+	}
+	
+	static <T extends Number> void invarianceWorkaround(List<T> list, T element) {
+		list.add(element);
 	}
 	
 //	private static void invalidAggregate(List<?> l1, List<?> l2, List<?> l3) {
