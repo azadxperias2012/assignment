@@ -132,8 +132,7 @@ public class Cache {
 //		});
 		
 		Arrays.sort(recommendedItems.items, RATING_COMPARATOR);
-		
-		System.out.println("\nSorted by rating ...");
+		System.out.println("\nSorted by rating (Anonymous Class) ...");
 		iterator = recommendedItems.iterator();
 
 		while (iterator.hasNext()) {
@@ -145,6 +144,22 @@ public class Cache {
 				System.out.println("\nPrinting y in FooBar.go: " + y);
 			}
 		}.go();
+		
+		Arrays.sort(recommendedItems.items, Bookmark.RATING_COMPARATOR);
+		System.out.println("\nSorted by rating (Static Member Class 1) ...");
+		iterator = recommendedItems.iterator();
+
+		while (iterator.hasNext()) {
+			System.out.println(iterator.next().getTitle());
+		}
+		
+		Arrays.sort(recommendedItems.items, new Bookmark.ComparatorList.StringLengthComparator());
+		System.out.println("\nSorted by String length (Static Member Class 2) ...");
+		iterator = recommendedItems.iterator();
+
+		while (iterator.hasNext()) {
+			System.out.println(iterator.next().getTitle());
+		}
 	}
 
 }
