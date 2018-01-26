@@ -1,5 +1,6 @@
 package com.neotechlabs.collections;
 
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -7,6 +8,8 @@ import java.util.NavigableSet;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
+
+import com.neotechlabs.nestedclasses.Bookmark;
 
 public class SetDemo {
 	
@@ -129,9 +132,12 @@ public class SetDemo {
 		//linkedHashSetDemo();
 		//treeSetDemo();
 		//treeSetDemo2();
-		treeSetDemo3(null);
-		treeSetDemo3(new PubDateAscComparator());
-		treeSetDemo3(new PubDateDescComparator());
+		//treeSetDemo3(null);
+		//treeSetDemo3(new PubDateAscComparator());
+		//treeSetDemo3(new PubDateDescComparator());
+		
+		treeSetDemo3(new Book.PubDateComparators.PubDateAscComparator());
+		treeSetDemo3(new Book.PubDateComparators.PubDateDescComparator());
 	}
 }
 
@@ -139,6 +145,42 @@ class Book implements Comparable {
 	private String title;
 	private String author;
 	private int year;
+	
+	public static final Comparator<Book> TITLE_COMPARATOR = new TitleComparator();
+	private static class TitleComparator implements Comparator<Book>, Serializable {
+		@Override
+		public int compare(Book o1, Book o2) {
+			return o1.getTitle().compareTo(o2.getTitle());
+		}
+	}
+	
+	public static class PubDateComparators {
+
+		public static class PubDateAscComparator implements Comparator<Book>, Serializable {
+			@Override
+			public int compare(Book o1, Book o2) {
+				Integer year1 = o1.getYear();
+				Integer year2 = o2.getYear();
+				if(year1.equals(year2)) {
+					return TITLE_COMPARATOR.compare(o1, o2);					
+				}
+				return year1.compareTo(year2);
+			}
+		}
+
+		public static class PubDateDescComparator implements Comparator<Book>, Serializable {
+			@Override
+			public int compare(Book o1, Book o2) {
+				Integer year1 = o1.getYear();
+				Integer year2 = o2.getYear();
+				if(year1.equals(year2)) {
+					return TITLE_COMPARATOR.compare(o1, o2);
+				}
+				return year1.compareTo(year2) == 1 ? -1: 1;
+			}
+		}
+
+	}
 
 	public String getTitle() {
 		return title;
