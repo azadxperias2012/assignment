@@ -85,6 +85,8 @@ public class GenericsDemo<T> {
 		
 		Collections.replaceAll(numList, 11.11, 44.44);
 		System.out.println("numList after replaceAll: " + numList);
+		
+		ArrayList<Integer> numLimt2 = new ArrayList<>(intList);
 	}
 	
 	// Changing to super will give compiler error as with super
