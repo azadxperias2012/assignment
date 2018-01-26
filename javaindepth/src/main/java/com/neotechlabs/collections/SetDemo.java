@@ -147,7 +147,7 @@ class Book implements Comparable {
 	private int year;
 	
 	public static final Comparator<Book> TITLE_COMPARATOR = new TitleComparator();
-	private static class TitleComparator implements Comparator<Book>, Serializable {
+	private static class TitleComparator implements Comparator<Book> {
 		@Override
 		public int compare(Book o1, Book o2) {
 			return o1.getTitle().compareTo(o2.getTitle());
@@ -156,7 +156,7 @@ class Book implements Comparable {
 	
 	public static class PubDateComparators {
 
-		public static class PubDateAscComparator implements Comparator<Book>, Serializable {
+		public static class PubDateAscComparator implements Comparator<Book> {
 			@Override
 			public int compare(Book o1, Book o2) {
 				Integer year1 = o1.getYear();
@@ -168,7 +168,7 @@ class Book implements Comparable {
 			}
 		}
 
-		public static class PubDateDescComparator implements Comparator<Book>, Serializable {
+		public static class PubDateDescComparator implements Comparator<Book> {
 			@Override
 			public int compare(Book o1, Book o2) {
 				Integer year1 = o1.getYear();
