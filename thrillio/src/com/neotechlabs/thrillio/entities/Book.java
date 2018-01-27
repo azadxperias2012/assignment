@@ -12,7 +12,7 @@ public class Book extends Bookmark implements Shareable {
 	private int publicationYear;
 	private String publisher;
 	private String[] authors;
-	private String genre;
+	private BookGenre genre;
 	private double amazonRating;
 
 	public int getPublicationYear() {
@@ -39,11 +39,11 @@ public class Book extends Bookmark implements Shareable {
 		this.authors = authors;
 	}
 
-	public String getGenre() {
+	public BookGenre getGenre() {
 		return genre;
 	}
 
-	public void setGenre(String genre) {
+	public void setGenre(BookGenre genre) {
 		this.genre = genre;
 	}
 
