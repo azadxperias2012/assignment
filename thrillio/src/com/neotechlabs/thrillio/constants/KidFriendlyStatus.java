@@ -5,12 +5,12 @@ public enum KidFriendlyStatus {
 	REJECTED("rejected"),
 	UNKNOWN("unknown");
 	
-	private KidFriendlyStatus(String status) {
-		this.status = status;
+	private KidFriendlyStatus(String name) {
+		this.name = name;
 	}
 	
-	private String status;
-	public String getStatus() {
-		return status;
+	private String name;
+	public String getName() {
+		return name;
 	}
 }
