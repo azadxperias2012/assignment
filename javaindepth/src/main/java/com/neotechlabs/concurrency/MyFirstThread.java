@@ -11,6 +11,7 @@ public class MyFirstThread {
 		try {
 			//Thread.sleep(3000); // unit of time is milli-seconds
 			TimeUnit.SECONDS.sleep(3);
+			thread.interrupt();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -24,6 +25,11 @@ class Task implements Runnable {
 	@Override
 	public void run() {
 		System.out.println("Inside run ...");
+		try {
+			TimeUnit.SECONDS.sleep(9);
+		} catch (InterruptedException e) {
+			System.out.println("interrupted!!!");
+		}
 		go();
 		
 	}

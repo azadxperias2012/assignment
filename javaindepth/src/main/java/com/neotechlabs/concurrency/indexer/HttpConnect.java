@@ -1,6 +1,7 @@
 package com.neotechlabs.concurrency.indexer;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -25,6 +26,28 @@ public class HttpConnect {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public static InputStream getInputStream(String sourceUrl) throws MalformedURLException, URISyntaxException {
+		System.out.println("Downloading: " + sourceUrl);
+		URL url = new URI(sourceUrl).toURL();
+		
+		try {
+			HttpURLConnection con = (HttpURLConnection) url.openConnection();
+			int responseCode = con.getResponseCode();
+			
+			if (responseCode >= 200 && responseCode < 300) { // ok
+				return con.getInputStream();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static String download(InputStream in) throws IOException {
+		return IOUtil.read(in);
 	}
 
 }
