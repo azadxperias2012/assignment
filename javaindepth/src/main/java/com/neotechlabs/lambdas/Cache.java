@@ -1,7 +1,10 @@
 package com.neotechlabs.lambdas;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
+import java.util.function.Consumer;
 
 interface CacheIterator {
 	boolean hasNext();
@@ -99,8 +102,6 @@ public class Cache {
 			System.out.println(iterator.next().getTitle());
 		}
 		
-		
-		
 		// Lambdas
 		Arrays.sort(recommendedItems.items, (o1, o2) ->
 			new Integer(o1.getTitle().length()).compareTo(new Integer(o2.getTitle().length())));
@@ -111,10 +112,38 @@ public class Cache {
 			System.out.println(iterator.next().getTitle());
 		}
 		
-		new Cache(5).go(() -> System.out.println("\nLambda"));
+		//new Cache(5).go(() -> System.out.println("\nLambda"));
 	}
 	
+	static int global = 0;
 	public void go(Test test) {
 		test.apply();
+		
+		int count = 0;
+		List<Integer> trick = new ArrayList<>();
+		
+		for (int i = 0; i < 5; i++) {
+			new Thread(() -> System.out.println(count)).start(); // Closure, can't change count since it is effectively final
+			new Thread(() -> System.out.println(global++)).start();
+			
+			new Thread(() -> {
+				trick.add(count);
+				int temp = trick.get(0);
+				trick.set(0, temp);
+			}).start();
+			
+			//Consumer<Integer> consumer = count -> {};
+			//Consumer<Integer> consumer = c -> { int count = 2; };
+			
+			new Thread(new Runnable() {
+				public void run() {
+					//int count = 2; count++; // can do this
+					//count++; // can't do this only
+				}
+			}).start();
+		}
+		
+		//count++;
+		new Thread(() -> System.out.println(this.global++)).start();
 	}
 }
