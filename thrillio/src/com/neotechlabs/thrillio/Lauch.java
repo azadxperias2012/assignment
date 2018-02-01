@@ -2,6 +2,7 @@ package com.neotechlabs.thrillio;
 
 import java.util.List;
 
+import com.neotechlabs.thrillio.bgjobs.WebpageDownloaderTask;
 import com.neotechlabs.thrillio.entities.Bookmark;
 import com.neotechlabs.thrillio.entities.User;
 import com.neotechlabs.thrillio.managers.BookmarkManager;
@@ -43,6 +44,14 @@ public class Lauch {
 	public static void main(String[] args) {
 		loadData();
 		start();
+		
+		// Background Jobs
+		runDownloaderJob();
+	}
+
+	private static void runDownloaderJob() {
+		WebpageDownloaderTask task = new WebpageDownloaderTask(true);
+		(new Thread(task)).start();
 	}
 
 }
