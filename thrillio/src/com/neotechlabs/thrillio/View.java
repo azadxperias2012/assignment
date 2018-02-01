@@ -9,6 +9,7 @@ import com.neotechlabs.thrillio.entities.Bookmark;
 import com.neotechlabs.thrillio.entities.User;
 import com.neotechlabs.thrillio.partner.Shareable;
 
+// Represents UI
 public class View {
 
 	public static void browse(User user, List<List<Bookmark>> bookmarks) {
