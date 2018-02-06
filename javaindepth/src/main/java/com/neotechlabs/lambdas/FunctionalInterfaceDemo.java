@@ -27,20 +27,29 @@ public class FunctionalInterfaceDemo {
 		for (String doc : documents) {
 			//boolean isTargetDoc = filter(doc, d -> d.contains("stream"));			
 			//if (isTargetDoc) {
-			BiFunction<String, String, Boolean> biFunction = (d, c) -> d.contains(c);
+			
+			//BiFunction<String, String, Boolean> biFunction = (d, c) -> d.contains(c);			
+			// (iii) Method References (ClassName::instanceMethod)
+			BiFunction<String, String, Boolean> biFunction = String::contains;
+			
 			if (biFunction.apply(doc, "stream")) {
 				//doc = transform(doc, d -> Indexer.stripHtmlTags(d));
 				//doc = transform(doc, d -> Indexer.removeStopwords(d));
 				
 				
 				Function<String, String> htmlCleaner = d -> Indexer.stripHtmlTags(d);
-				//doc = transform(doc, htmlCleaner);
+				doc = transform(doc, htmlCleaner);
 				
-				Function<String, String> stopWordRemover = d -> Indexer.removeStopwords(d);
-				//stopWordRemover.apply(doc);
+//				Function<String, String> stopWordRemover = d -> Indexer.removeStopwords(d);
+//				doc = stopWordRemover.apply(doc);
 				
-				Function<String, String> docProcessor = htmlCleaner.andThen(stopWordRemover);
-				doc = docProcessor.apply(doc);
+				// (i) Method References (ClassName::staticMethod)
+				Function<String, String> stopWordRemover = Indexer::removeStopwords;
+				doc = stopWordRemover.apply(doc);
+				// Note: Type of Method reference should be appropriate for the abstract method in 
+				
+				//Function<String, String> docProcessor = htmlCleaner.andThen(stopWordRemover);
+				//doc = docProcessor.apply(doc);
 				
 				//System.out.println(doc);
 
@@ -48,7 +57,10 @@ public class FunctionalInterfaceDemo {
 			}
 		}
 		
-		targetDocuments.forEach(d -> System.out.println(d));
+		//targetDocuments.forEach(d -> System.out.println(d));
+		
+		// (ii) Method References (objectRef::instanceMethod)
+		targetDocuments.forEach(System.out::println);
 		
 		for (String doc : targetDocuments) {
 			try {
@@ -73,13 +85,13 @@ public class FunctionalInterfaceDemo {
 		return filter.test(doc);
 	}
 	
-//	static String transform(String doc, Function<String, String> transformer) {
-//		return transformer.apply(doc);
-//	}
-	
-	static String transform(String doc, UnaryOperator<String> transformer) {
+	static String transform(String doc, Function<String, String> transformer) {
 		return transformer.apply(doc);
 	}
+	
+//	static String transform(String doc, UnaryOperator<String> transformer) {
+//		return transformer.apply(doc);
+//	}
 
 }
 
