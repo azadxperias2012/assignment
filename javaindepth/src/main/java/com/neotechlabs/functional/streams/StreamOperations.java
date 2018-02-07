@@ -2,6 +2,7 @@ package com.neotechlabs.functional.streams;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -101,10 +102,47 @@ public class StreamOperations {
 		//slice(books);
 		
 		// terminal operations (return non-stream objects)
-		match(books); // matching stream elements to some criteria
+		//match(books); // matching stream elements to some criteria
 		
 		// All matching and finding operations + limit
 		//		are short-circuit operations (recall &&, ||)
+		
+		find(books);
+	}
+
+	// Queries:
+	// 	(a) Is there at least one highly rated book (>= 4.8) that is inexpensive (<= 50.0)
+	// 	(b) Do all the books have a rating >= 4.8
+	// 	(c) Check if none of books have bad rating (2.0)? 
+	private static void find(List<Book> books) {
+		System.out.println("\nFinding ...");
+		Optional<Book> result = books.stream()
+			.filter(d -> d.getRating() >= 4.8 && d.getPrice() <= 50.0)
+			.findAny();
+			//.findFirst(); // use this for appropriate result
+		
+		if (result.isPresent()) {
+			System.out.println(result.get());
+		} else {
+			System.out.println("Not found!!!");
+		}
+		
+		books.stream()
+			.filter(d -> d.getRating() >= 4.8 && d.getPrice() <= 50.0)
+			.findAny().ifPresent(StreamOperations::print);
+		
+		books.stream()
+			.filter(d -> d.getRating() >= 5.0 && d.getPrice() <= 50.0)
+			.findAny().orElse(StreamOperations.getDefault()); // eager
+		
+		books.stream()
+			.filter(d -> d.getRating() >= 5.0 && d.getPrice() <= 50.0)
+			.findAny().orElseGet(StreamOperations::getDefault); // lazy
+		
+		Optional<Book> opt = Optional.of(books.get(0));
+		if (opt.isPresent()) {
+			System.out.println(opt.get()); // directly accessing get may throw NPE
+		}
 	}
 
 	// Queries:
@@ -157,5 +195,13 @@ public class StreamOperations {
 		Stream<String> titleStream = booksStream.map(d -> d.getTitle());
 		titleStream.forEach(System.out::println);
 	}
-
+	
+	private static void print(Book book) {
+		System.out.println(book);
+	}
+	
+	private static Book getDefault() {
+		System.out.println("default ...");
+		return new Book(0, "", 4.0, 25.0, "Amazon");
+	}
 }
