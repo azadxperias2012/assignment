@@ -128,6 +128,11 @@ public class StreamOperations {
 				.reduce(new StringBuilder(), (sb, s) -> sb.append(s),
 						(sb1, sb2) -> sb1.append(sb2));
 		System.out.println("concat2: " + concat2.toString());
+		
+		StringBuilder concat3 = Arrays.stream(grades)
+				.map(s -> new StringBuilder(s))
+				.reduce(new StringBuilder(), (sb, s) -> sb.append(s));
+		System.out.println("concat3: " + concat3.toString());
 	}
 
 	private static void reduceImperatively(List<Book> books) {
