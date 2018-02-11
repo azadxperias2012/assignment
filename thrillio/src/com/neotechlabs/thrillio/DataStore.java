@@ -21,10 +21,24 @@ public class DataStore {
 	private static List<UserBookmark> userBookmarks = new ArrayList<>();
 
 	public static void loadData() {
-		loadUsers();
-		loadWebLinks();
-		loadMovies();
-		loadBooks();
+//		loadUsers();
+//		loadWebLinks();
+//		loadMovies();
+//		loadBooks();
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			// OR
+			//new com.mysql.jdbc.Driver();
+			// OR
+			//System.setProperty("jdbc.drivers", "com.mysql.jdbc.Driver");
+			// OR
+			//java.sql.DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	private static void loadUsers() {
