@@ -17,10 +17,8 @@ import com.neotechlabs.thrillio.constants.UserType;
 import com.neotechlabs.thrillio.entities.Bookmark;
 import com.neotechlabs.thrillio.entities.User;
 import com.neotechlabs.thrillio.entities.UserBookmark;
-import com.neotechlabs.thrillio.entities.WebLink;
 import com.neotechlabs.thrillio.managers.BookmarkManager;
 import com.neotechlabs.thrillio.managers.UserManager;
-import com.neotechlabs.thrillio.util.IOUtil;
 
 public class DataStore {
 
