@@ -43,10 +43,10 @@ public class Lauch {
 
 	public static void main(String[] args) {
 		loadData();
-		start();
+		//start();
 		
 		// Background Jobs
-		runDownloaderJob();
+		//runDownloaderJob();
 	}
 
 	private static void runDownloaderJob() {
