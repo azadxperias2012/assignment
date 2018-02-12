@@ -28,26 +28,26 @@ public class View {
 					}
 				//}
 
-//				if (user.getUserType().equals(UserType.EDITOR) || user.getUserType().equals(UserType.EDITOR)) {
-//
-//					// Mark as kid-friendly
-//					if (bookmark.isKidFriendlyEligible()
-//							&& bookmark.getKidFriendlyStatus().equals(KidFriendlyStatus.UNKNOWN)) {
-//						KidFriendlyStatus kidFriendlyStatus = getKidFriendlyStatusDecision(bookmark);
-//						if (!kidFriendlyStatus.equals(KidFriendlyStatus.UNKNOWN)) {
-//							BookmarkController.getInstance().setKidFriendlyStatus(user, kidFriendlyStatus, bookmark);
-//						}
-//					}
-//
-//					// Sharing!!
-//					if (bookmark.getKidFriendlyStatus().equals(KidFriendlyStatus.APPROVED)
-//							&& bookmark instanceof Shareable) {
-//						boolean isShared = getShareDecision();
-//						if (isShared) {
-//							BookmarkController.getInstance().share(user, bookmark);
-//						}
-//					}
-//				}
+				if (user.getUserType().equals(UserType.EDITOR) || user.getUserType().equals(UserType.CHIEF_EDITOR)) {
+
+					// Mark as kid-friendly
+					if (bookmark.isKidFriendlyEligible()
+							&& bookmark.getKidFriendlyStatus().equals(KidFriendlyStatus.UNKNOWN)) {
+						KidFriendlyStatus kidFriendlyStatus = getKidFriendlyStatusDecision(bookmark);
+						if (!kidFriendlyStatus.equals(KidFriendlyStatus.UNKNOWN)) {
+							BookmarkController.getInstance().setKidFriendlyStatus(user, kidFriendlyStatus, bookmark);
+						}
+					}
+
+					// Sharing!!
+					if (bookmark.getKidFriendlyStatus().equals(KidFriendlyStatus.APPROVED)
+							&& bookmark instanceof Shareable) {
+						boolean isShared = getShareDecision();
+						if (isShared) {
+							BookmarkController.getInstance().share(user, bookmark);
+						}
+					}
+				}
 			}
 		}
 	}
@@ -58,8 +58,13 @@ public class View {
 	}
 
 	private static KidFriendlyStatus getKidFriendlyStatusDecision(Bookmark bookmark) {
-		return Math.random() < 0.4 ? KidFriendlyStatus.APPROVED
-				: (Math.random() >= 0.4 && Math.random() < 0.8) ? KidFriendlyStatus.REJECTED
+//		return Math.random() < 0.4 ? KidFriendlyStatus.APPROVED
+//				: (Math.random() >= 0.4 && Math.random() < 0.8) ? KidFriendlyStatus.REJECTED
+//						: KidFriendlyStatus.UNKNOWN;
+		
+		double decision = Math.random();		
+		return decision < 0.4 ? KidFriendlyStatus.APPROVED
+				: (decision >= 0.4 && decision < 0.8) ? KidFriendlyStatus.REJECTED
 						: KidFriendlyStatus.UNKNOWN;
 	}
 
