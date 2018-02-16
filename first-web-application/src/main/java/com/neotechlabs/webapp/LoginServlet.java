@@ -45,6 +45,9 @@ public class LoginServlet extends HttpServlet {
 //		out.println("</body>");
 //		out.println("</html>");
 		
+		String name = request.getParameter("name");
+		request.setAttribute("name", name);
+		
 		request.getRequestDispatcher("/WEB-INF/views/login.jsp")
 			.forward(request, response);
 	}
