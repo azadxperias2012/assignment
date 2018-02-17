@@ -4,7 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Welcome</title>
+		<title>Todo</title>
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 		
@@ -16,8 +16,9 @@
 	</head>
 	<body>
 		<div class="container">
-			<div class="jumbotron">
-				<h1 class="display-4">Welcome ${name}</h1>
+			<div>
+				<p>Your Todos are:</p>
+				<p>${todos}</p>
 			</div>
 		</div>
 	</body>
