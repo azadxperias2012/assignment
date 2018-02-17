@@ -17,15 +17,8 @@
 	<body>
 		<div class="container">
 			<div class="jumbotron">
-				<h1 class="display-4">Hello, world!</h1>
+				<h1 class="display-4">Welcome ${name}</h1>
 			</div>
-			
-			<form action="/login.do" method="post">
-			  <div class="form-group">			    
-			    <input type="text" class="form-control" name="name" placeholder="name">			    
-			  </div>
-			  <button type="submit" class="btn btn-primary">Login</button>
-			</form>
 		</div>
 	</body>
 </html>
