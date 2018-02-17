@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.neotechlabs.webapp.service.TodoService;
 import com.neotechlabs.webapp.service.UserValidationService;
 
 /*
@@ -35,7 +36,8 @@ import com.neotechlabs.webapp.service.UserValidationService;
 @WebServlet(urlPatterns = "/login.do")
 public class LoginServlet extends HttpServlet {
 	
-	UserValidationService userValidationService = new UserValidationService();  
+	UserValidationService userValidationService = new UserValidationService();
+	TodoService todoService = new TodoService();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -60,10 +62,11 @@ public class LoginServlet extends HttpServlet {
 		
 		if (userValidationService.isValidUser(userName, password)) {
 			request.setAttribute("name", userName);
+			request.setAttribute("todos", todoService.retrieveTodos());
 			request.getRequestDispatcher("/WEB-INF/views/welcome.jsp")
 				.forward(request, response);
 		} else {
-			request.setAttribute("errorMessage", "Invalid Credentials");
+			request.setAttribute("errorMessage", "Invalid Credentials");			
 			request.getRequestDispatcher("/WEB-INF/views/login.jsp")
 				.forward(request, response);
 		}

@@ -19,6 +19,10 @@
 			<div class="jumbotron">
 				<h1 class="display-4">Welcome ${name}</h1>
 			</div>
+			<div>
+				<p>Your Todos are:</p>
+				<p>${todos}</p>
+			</div>
 		</div>
 	</body>
 </html>
