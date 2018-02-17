@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -16,9 +17,11 @@
 	</head>
 	<body>
 		<div class="container">
-			<div class="alert alert-danger" role="alert">
-	  			${errorMessage}
-			</div>
+			<c:if test="${errorMessage != null}">
+				<div class="alert alert-danger" role="alert">
+		  			${errorMessage}
+				</div>
+			</c:if>
 			<div class="jumbotron">
 				<h1 class="display-4">Hello, world!</h1>
 			</div>

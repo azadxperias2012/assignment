@@ -17,7 +17,12 @@
 	</head>
 	<body>
 		<div class="container">
-			<div>
+			<div>				
+				<c:if test="${name != null}">
+					<div class="alert alert-success" role="alert">
+			  			Welcome ${name}
+					</div>
+				</c:if>
 				<h1 class="display-4">Your Todos are:</h1>
 				<ul class="list-group">
 					<c:forEach items="${todos}" var="todo">
