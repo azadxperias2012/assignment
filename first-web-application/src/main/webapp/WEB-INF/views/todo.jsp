@@ -26,7 +26,11 @@
 				<h1 class="display-4">Your Todos are:</h1>
 				<ul class="list-group">
 					<c:forEach items="${todos}" var="todo">
-						<li class="list-group-item">${todo.name}</li>
+						<li class="list-group-item">
+							${todo.name}
+							<a href="/delete-todo.do?todo=${todo.name}">Delete</a>
+						</li>
+						
 					</c:forEach>
 				</ul>
 			</div>
