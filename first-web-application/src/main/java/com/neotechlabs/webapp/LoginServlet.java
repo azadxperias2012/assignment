@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.neotechlabs.webapp.service.UserValidationService;
+
 /*
  * Browser sends Http Request to Web Server
  * 
@@ -32,6 +34,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(urlPatterns = "/login.do")
 public class LoginServlet extends HttpServlet {
+	
+	UserValidationService userValidationService = new UserValidationService();  
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -51,8 +55,17 @@ public class LoginServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("name", request.getParameter("name"));
-		request.getRequestDispatcher("/WEB-INF/views/welcome.jsp")
-			.forward(request, response);
+		String userName = request.getParameter("name");
+		String password = request.getParameter("password");
+		
+		if (userValidationService.isValidUser(userName, password)) {
+			request.setAttribute("name", userName);
+			request.getRequestDispatcher("/WEB-INF/views/welcome.jsp")
+				.forward(request, response);
+		} else {
+			request.setAttribute("errorMessage", "Invalid Credentials");
+			request.getRequestDispatcher("/WEB-INF/views/login.jsp")
+				.forward(request, response);
+		}
 	}
 }
