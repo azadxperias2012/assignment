@@ -46,7 +46,7 @@
 				</c:forEach>
 			</ol>
 			
-			<form action="todo.do" method="post">
+			<form action="add-todo.do" method="post">
 			  <div style="margin-top:16px;">
 			  	<div class="form-group">
 			  		<label for="newTodo">New Todo :</label>

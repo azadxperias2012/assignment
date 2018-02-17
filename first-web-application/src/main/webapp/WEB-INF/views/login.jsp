@@ -6,37 +6,58 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<title>Login Page</title>
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="webjars/bootstrap/3.3.6/css/bootstrap.min.css">
 		
-		<!-- jQuery library -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		
-		<!-- Latest compiled JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<style>
+			.footer {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+				height: 60px;
+				background-color: #f5f5f5;
+			}
+		</style>
 	</head>
 	<body>
+		<nav class="navbar navbar-default">
+			<a href="/" class="navbar-brand">Brand</a>
+			
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="/todo.do">Todos</a></li>
+				<li><a href="http://www.in28minutes.com">In28minutes</a></li>
+			</ul>
+			
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="/login.do">Login</a></li>
+			</ul>
+		</nav>
+
 		<div class="container">
 			<c:if test="${errorMessage != null}">
 				<div class="alert alert-danger" role="alert">
 		  			${errorMessage}
 				</div>
 			</c:if>
-			<div class="jumbotron">
-				<h1 class="display-4">Hello, world!</h1>
-			</div>
-			
+
 			<form action="/login.do" method="post">
 			  <div class="form-group">
-			  	<label for="name">Username</label>
-			    <input id="name" type="text" class="form-control" name="name" placeholder="name">			    
+			    <input type="text" class="form-control" name="name" placeholder="Username">			    
 			  </div>
 			  <div class="form-group">
-			  	<label for="password">Password</label>
-			    <input id="password" type="password" class="form-control" name="password" placeholder="password">
+			    <input type="password" class="form-control" name="password" placeholder="Password">
 			  </div>
 			  <button type="submit" class="btn btn-primary">Login</button>
 			</form>
 		</div>
+
+		<footer class="footer">
+			<div>Footer Content</div>
+		</footer>
+		
+		<!-- jQuery library -->
+		<script src="webjars/jquery/1.9.1/jquery.min.js"></script>		
+		<!-- Latest compiled JavaScript -->
+		<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	</body>
 </html>
