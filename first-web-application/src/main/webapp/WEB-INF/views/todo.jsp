@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -17,8 +18,12 @@
 	<body>
 		<div class="container">
 			<div>
-				<p>Your Todos are:</p>
-				<p>${todos}</p>
+				<h1 class="display-4">Your Todos are:</h1>
+				<ul class="list-group">
+					<c:forEach items="${todos}" var="todo">
+						<li class="list-group-item">${todo.name}</li>
+					</c:forEach>
+				</ul>
 			</div>
 		</div>
 	</body>
