@@ -5,15 +5,8 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Todo</title>
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-		
-		<!-- jQuery library -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		
-		<!-- Latest compiled JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<title>Todo</title>		
+		<link rel="stylesheet" href="webjars/bootstrap/3.3.6/css/bootstrap.min.css">
 	</head>
 	<body>
 		<div class="container">
@@ -46,5 +39,10 @@
 			  </div>
 			</form>
 		</div>
+		
+		<!-- jQuery library -->
+		<script src="webjars/jquery/1.9.1/jquery.min.js"></script>		
+		<!-- Latest compiled JavaScript -->
+		<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	</body>
 </html>
