@@ -30,6 +30,17 @@
 					</c:forEach>
 				</ul>
 			</div>
+			
+			<form action="todo.do" method="post">
+			  <div class="form-row" style="margin-top:16px;">
+			    <div class="col">
+			      <input type="text" class="form-control" name="todo" placeholder="Add new todo">
+			    </div>
+			    <div class="col">
+			      <button type="submit" class="btn btn-primary">Add</button>
+			    </div>
+			  </div>
+			</form>
 		</div>
 	</body>
 </html>

@@ -21,5 +21,13 @@ public class TodoServlet extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/views/todo.jsp")
 			.forward(request, response);
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String newTodo = request.getParameter("todo");
+		todoService.addNewTodo(new Todo(newTodo));
+		
+		response.sendRedirect("/todo.do");
+	}
 
 }
