@@ -1,0 +1,10 @@
+<footer class="footer">
+			<div>Footer Content</div>
+		</footer>
+		
+		<!-- jQuery library -->
+		<script src="webjars/jquery/1.9.1/jquery.min.js"></script>		
+		<!-- Latest compiled JavaScript -->
+		<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	</body>
+</html>
