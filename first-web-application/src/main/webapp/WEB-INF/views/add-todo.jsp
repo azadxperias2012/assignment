@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<title>Todo</title>		
+		<title>Add New Todo</title>		
 		<link rel="stylesheet" href="webjars/bootstrap/3.3.6/css/bootstrap.min.css">
 		
 		<style>
@@ -35,18 +35,15 @@
 		</nav>
 	
 		<div class="container">
-			<h1>Welcome ${name}</h1>
-
-			Your Todos are
-			<ol>
-				<c:forEach items="${todos}" var="todo">
-					<li>${todo.name}&nbsp;<a 
-						href="/delete-todo.do?todo=${todo.name}">Delete</a>
-					</li>						
-				</c:forEach>
-			</ol>
-			
-			<a href="/add-todo.do">Add New Todo</a>
+			<form action="add-todo.do" method="post">
+			  <div style="margin-top:16px;">
+			  	<div class="form-group">
+			  		<label for="newTodo">New Todo :</label>
+			    	<input id="newTodo" type="text" class="form-control" name="todo" placeholder="Add new todo">			    
+			  	</div>
+		      <button type="submit" class="btn btn-primary">Add</button>
+			  </div>
+			</form>
 		</div>
 		
 		<footer class="footer">

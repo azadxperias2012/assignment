@@ -13,6 +13,12 @@ import com.neotechlabs.webapp.service.TodoService;
 @WebServlet(urlPatterns = "/add-todo.do")
 public class AddTodoServlet extends HttpServlet {
 	TodoService todoService = new TodoService();
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		request.getRequestDispatcher("/WEB-INF/views/add-todo.jsp")
+			.forward(request, response);
+	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
