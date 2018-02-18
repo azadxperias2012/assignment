@@ -23,8 +23,9 @@ public class AddTodoServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String newTodo = request.getParameter("todo");
-		todoService.addNewTodo(new Todo(newTodo));
-		
+		String category = request.getParameter("category");
+
+		todoService.addNewTodo(new Todo(newTodo, category));
 		response.sendRedirect("/todo.do");
 	}
 }

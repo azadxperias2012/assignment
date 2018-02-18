@@ -35,14 +35,29 @@
 		</nav>
 	
 		<div class="container">
+			Your New Action Item:
 			<form action="add-todo.do" method="post">
-			  <div style="margin-top:16px;">
+			  	<fieldset class="form-group">
+			  		<label>Description :</label>
+			    	<input type="text" class="form-control" name="todo" placeholder="New todo description">			    
+			  	</fieldset>
+			  	<fieldset class="form-group">
+			  		<label>Category :</label>
+			    	<input type="text" class="form-control" name="category" placeholder="Category">			    
+			  	</fieldset>
+		      <button type="submit" class="btn btn-primary">Add</button>
+
+			  <!-- <div style="margin-top:16px;">
 			  	<div class="form-group">
-			  		<label for="newTodo">New Todo :</label>
-			    	<input id="newTodo" type="text" class="form-control" name="todo" placeholder="Add new todo">			    
+			  		<label for="description">Description :</label>
+			    	<input id="description" type="text" class="form-control" name="todo" placeholder="New todo description">			    
+			  	</div>
+			  	<div class="form-group">
+			  		<label for="category">Category :</label>
+			    	<input id="category" type="text" class="form-control" name="category" placeholder="Category">			    
 			  	</div>
 		      <button type="submit" class="btn btn-primary">Add</button>
-			  </div>
+			  </div> -->
 			</form>
 		</div>
 		
