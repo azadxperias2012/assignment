@@ -30,4 +30,15 @@ public class StringHelperTest {
 		assertEquals("CDAA", helper.truncateAInFirst2Positions("CDAA"));
 	}
 
+	// ABCD => false, ABAB => true, AB => true, A => false
+	@Test
+	public void testAreFirstAndLastTwoCharactersTheSame_BasicNegativeScenario() {
+		assertFalse(helper.areFirstAndLastTwoCharactersTheSame("ABCD"));
+	}
+
+	@Test
+	public void testAreFirstAndLastTwoCharactersTheSame_BasicPositiveScenario() {
+		assertTrue(helper.areFirstAndLastTwoCharactersTheSame("ABAB"));
+	}
+
 }
