@@ -23,7 +23,7 @@ public class ArraysCompareTest {
 		Arrays.sort(numbers);
 	}
 	
-	@Test(timeout = 20)
+	@Test(timeout = 100)
 	public void testArraySort_Performance() {
 		int[] array = {12, 23, 4};
 		
